@@ -46,9 +46,9 @@ class Command(BaseCommand):
 
         # Replace tags
         rendered = (
-            template.replace("{{critical_css}}", critical_css)
-                    .replace("{{full_css}}", full_css)
-                    .replace("{{scripts}}", scripts)
+            template.replace("<!-- {{critical_css}} -->", critical_css)
+                    .replace("<!-- {{full_css}} -->", full_css)
+                    .replace("<!-- {{scripts}} -->", scripts)
         )
 
         # Write result
