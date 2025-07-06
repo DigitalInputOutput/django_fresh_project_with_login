@@ -1,0 +1,68 @@
+{%extends base%}
+{%load i18n%}
+{%block body%}
+<div class="form-wrap">
+    <div id="logup-form" class="form">
+        <form id="logup" method="post" action="javascript:void(0)">
+            {%csrf_token%}
+            <h3>{{h1}}</h3>
+            <div class="fieldset">
+                <div class="field">
+                    {{form.login.label_tag}}
+                    {{form.login}}
+                    {{form.login.errors}}
+                </div>
+                <div class="field">
+                    {{form.email.label_tag}}
+                    {{form.email}}
+                    {{form.email.errors}}
+                </div>
+            </div>
+            <div class="fieldset">
+                <div class="field">
+                    {{form.fname.label_tag}}
+                    {{form.fname}}
+                    {{form.fname.errors}}
+                </div>
+                <div class="field">
+                    {{form.lname.label_tag}}
+                    {{form.lname}}
+                    {{form.lname.errors}}
+                </div>
+                <div class="field">
+                    {{form.sname.label_tag}}
+                    {{form.sname}}
+                    {{form.sname.errors}}
+                </div>
+            </div>
+            <div class="fieldset">
+                <div class="field">
+                    {{form.firma.label_tag}}
+                    {{form.firma}}
+                    {{form.firma.errors}}
+                </div>
+            </div>
+            <div class="fieldset">
+                <div class="field">
+                    {{form.password1.label_tag}}
+                    {{form.password1}}
+                    {{form.password1.errors}}
+                </div>
+                <div class="field">
+                    {{form.password2.label_tag}}
+                    {{form.password2}}
+                    {{form.password2.errors}}
+                </div>
+            </div>
+            <button class="blue">{% trans 'Registration'%}</button>
+            <div id="error">{{error}}</div>
+        </form>
+    </div>
+</div>
+<script>
+    document.querySelector('button').addEventListener('click',() => {
+        document.querySelector('form').setAttribute("action","/user/logup");
+        document.querySelector('form').submit();
+    });
+</script>
+{%endblock%}

@@ -1,0 +1,37 @@
+/* critical */
+html,body{
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	height: 100%;
+	color:#36454d;
+	background-color: #f0f3f5;
+}
+*{
+	box-sizing:border-box;
+}
+/* endcritical */
+button, .button{
+	text-decoration: none;
+	text-align: center;
+	width: 140px;
+	height: 40px;
+	background-color: #518452;
+	border: none;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+	border-radius: 3px;
+}
+button:hover,.button{
+	background-color: #518452;
+}
+a{
+	color: #4688CD;
+	cursor: pointer;
+    font-size: 14px;
+}
+main a:hover{
+	text-decoration: underline;
+	color: #1D5FA4;
+}

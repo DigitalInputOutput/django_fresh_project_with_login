@@ -1,0 +1,43 @@
+{%extends 'index.html'%}
+{%load i18n%}
+{%block body%}
+<div class="form-wrap">
+    <div id="login-form" class="form">
+        <form action="javascript: void(0)" method="post">
+            {%csrf_token%}
+            <div class="fields">
+                <div class="fieldset">
+                    <div class="field">
+                        {{form.login.label_tag}}
+                        {{form.login}}
+                        {{form.login.errors}}
+                        <div class="errors"></div>
+                    </div>
+                </div>
+                <div class="fieldset">
+                    <div class="field">
+                        {{form.password.label_tag}}
+                        {{form.password}}
+                        {{form.password.errors}}
+                        <div class="errors"></div>
+                    </div>
+                </div>
+                <div class="errors">
+                    {{form.errors}}
+                </div>
+            </div>
+            <button id="login-button">{% trans 'Anmelden' %}</button>
+            <div id="registrationLink">
+                <a href="/user/logup">{% trans 'New Account'%}</a>
+            </div>
+        </form>
+    </div>
+    <div></div>
+</div>
+<script>
+    document.querySelector('button').addEventListener('click',() => {
+        document.querySelector('form').setAttribute("action","/user/login");
+        document.querySelector('form').submit();
+    });
+</script>
+{%endblock%}

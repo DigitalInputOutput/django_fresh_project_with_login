@@ -1,0 +1,59 @@
+(function(){'use strict';Object.assign(Array.prototype,{switchClass(class1,class2){this.forEach((elem)=>{if(elem.hasClass(class1)){elem.removeClass(class1);elem.addClass(class2);}else if(elem.hasClass(class2)){elem.removeClass(class2);elem.addClass(class1);}});},each(func){for(let i=0;i<this.length;i++){func(this[i]);}},toggle(type){this.forEach((elem)=>{if(elem.style.display=='none'||elem.style.display==''){if(type)
+elem.style.display=type;else{elem.style.display='block';}}else{elem.style.display='none';}});},next(){return this[0].nextElementSibling;},on(event,listener,selector){let events=event.split(' ');this.forEach((elem)=>{for(event in events){elem.addEventListener(events[event],listener);}});},removeEvent(event,listener,selector){let events=event.split(' ');this.forEach((elem)=>{for(event in events){elem.removeEventListener(events[event],listener);}});},after(html){this.forEach((elem)=>{elem.innerHTML+=html;});},toggleClass(name){this.forEach((elem)=>{if(elem.hasClass(name))
+elem.removeClass(name);else{elem.addClass(name);}});},show(type){if(type)
+this.forEach((elem)=>{elem.style.display=type;});else{this.forEach((elem)=>{elem.style.display='block';});}},hide(){this.forEach((elem)=>{elem.style.display='none';});},clear(){this.forEach((elem)=>{while(elem.firstChild){elem.removeChild(elem.firstChild);}});},append(child){this.forEach((elem)=>{elem.append(child)});},active(){this.forEach((elem)=>{if(elem.className.includes('active')){elem.removeClass('active');}else{elem.addClass('active');}});},addClass(name){this.forEach((elem)=>{if(!elem.className.includes(name))
+elem.classList.add(name);});},removeClass(name){this.forEach((elem)=>{if(elem.className.includes(name))
+elem.removeClass(name);});},before(child,before){this.forEach((elem)=>{if(!before)
+before=elem.childNodes[0];else{before=elem.childNodes[before];}
+elem.insertBefore(child,before)});},hasClass(name){if(this[0].className.includes(name))
+return true;else{return false}},html(html){if(html){this.forEach((elem)=>{elem.innerHTML=html;});}else{return this[0].innerHTML;}},set(name,value){this.forEach((elem)=>{elem.setAttribute(name,value);});},css(attr,value){this.forEach((elem)=>{if(value)
+elem.style[attr]=value;});},text(text){if(text){try{this[0].firstChild.nodeValue=text;}catch(e){let t=document.createTextNode(text);this.append(t);}}
+else{try{return this[0].firstChild.nodeValue;}catch(e){return undefined;}}},width(){return this[0].clientWidth;},height(){return this[0].clientHeight;},ready(func){this.forEach((elem)=>{elem.onload=func;});},remove(val){this.splice(this.indexOf(val),1);},last(){return this[this.length-1];},});})();(function(){document.ready=function(listener){document.addEventListener('readystatechange',(e)=>{switch(e.target.readyState){case'complete':listener();break;}});};})();(function(){Object.assign(Element.prototype,{closer(selector){let result=undefined;let parent=this.parent();if(!parent)
+return result;if(parent.localName==selector)
+return parent;while(!result){if(parent===null)
+return result;result=parent.find(selector);if(!result||(Array.isArray(result)&&!result.length))
+result=undefined;else if(Array.isArray(result)&&result.length){return result[0];}
+if(!parent||typeof parent.parent!=="function")
+return undefined;parent=parent.parent();}
+return result;},styles(property){return window.getComputedStyle(Dom.query('#menu'))[property];},includes(target){if(this.children.toArray().includes(target))
+return true;else{return false;}},grid(){this.style.display='grid';},next(){return this.nextElementSibling;},prev(){return this.previousElementSibling;},last(){return this.lastElementChild;},active(){if(this.className.includes('active')){this.removeClass('active');}else{this.addClass('active');}},toggleMenu(parameters){let item=this;setTimeout(()=>{item.active();if(parameters.parent){if(parameters.parent.activeItem==item){parameters.parent.activeItem=undefined;return;}
+if(parameters.closeAll&&parameters.parent.activeItem)
+parameters.parent.activeItem.active();parameters.parent.activeItem=item;}},parameters.timeout?parameters.timeout:0);},parent(){return this.parentElement;},find(selector){try{if(selector.includes('#')&&(!selector.includes(' ')||selector.includes(','))){return this.querySelector(selector);}else{return Array.prototype.slice.call(this.querySelectorAll(selector));}}catch(e){console.log(e);}},replace(newChild,oldChild){if(typeof newChild=='string'){oldChild.remove();this.append(newChild);}else{this.replaceChild(newChild,oldChild);}},append(child){if(typeof child=='string')
+return this.insertAdjacentHTML('beforeend',child);else if(child){return this.appendChild(child);}},before(child,before){if(child){if(!before)
+before=this.childNodes[0];this.insertBefore(child,before);}},getBefore(){return window.getComputedStyle(this,':before');},clear(){while(this.firstChild){this.removeChild(this.firstChild);}},each(func){for(let i=0;i<this.children.length;i++){func(this.children[i]);}},attr(name){return this.getAttribute(name);},get(name){return this.getAttribute(name);},set(name,value){return this.setAttribute(name,value);},removeAttr(name){return this.removeAttribute(name);},html(html){if(html)
+this.innerHTML=html;else{return this.innerHTML;}},after(html){this.innerHTML+=html;},afterOf(newElem,node){this.insertBefore(newElem,node);},first(){return this.firstElementChild;},show(type){if(type)
+this.style.display=type;else{this.style.display='block';}},hide(){this.style.display='none';},toggle(type){if(this.style.display=='none'||this.style.display==''){if(type)
+this.style.display=type;else{this.style.display='block';}}else{this.style.display='none';}},addClass(classes){classes.split(" ").forEach((name)=>{if(!this.className.includes(name))
+this.classList.add(name);})},removeClass(name){this.classList.remove(name);},hasClass(name){if(this.className.includes(name))
+return true;else{return false}},toggleClass(name){if(this.hasClass(name))
+this.removeClass(name);else{this.addClass(name);}},on(events,listener){events=events.split(' ');for(let e in events){this.addEventListener(events[e],listener);}},removeEvent(events,listener){events=events.split(' ');for(let e in events){this.removeEventListener(events[e],listener);}},switchClass(class1,class2){if(this.hasClass(class1)){this.removeClass(class1);this.addClass(class2);}else if(this.hasClass(class2)){this.removeClass(class2);this.addClass(class1);}},height(){return this.clientHeight;},text(text){if(text){try{this.firstChild.nodeValue=text;}catch(e){let t=document.createTextNode(text);this.append(t);}}
+else{return this.innerText;}},width(){return this.clientWidth;},top(value){this.style['top']=value;},enable(){this.removeAttr('disabled');},disable(){this.set('disabled','');},removeError(){this.removeClass('invalid');let errorBlock=this.next();if(!errorBlock.hasClass('errors')){errorBlock=Dom.query(`.${this.name}.errors`)[0];}
+if(errorBlock){errorBlock.clear();errorBlock.hide();}},triggerInvalid(){this.addClass('invalid');if(this.validateSubmit){this.validateSubmit.addClass('disabled');this.validateSubmit.set('disabled','disabled');}},triggerValid(){this.removeClass('invalid');if(this.validateSubmit){this.validateSubmit.removeClass('disabled');this.validateSubmit.removeAttr('disabled');}},validate(rules){validator=new Validator(this,rules);},ready(func){this.onload=func;},serializeJSON(){let data={};for(let i of['input','select','textarea']){for(let elem of this.find(i)){switch(elem.type){case'select-one':if(elem.value)
+data[elem.name]=eval(elem.value);break;case'select-multiple':data[elem.name]=[];for(var j=elem.options.length-1;j>=0;j=j-1){if(elem.options[j].selected)
+data[elem.name].append(elem.options[j].value);}
+break;case'file':let b64Elem=elem.closer(`input[name="${elem.name}_b64"]`);if(b64Elem){data[elem.name]=b64Elem.value;}
+else if(elem.name.includes('[]')&&elem.value){let name=elem.name.replace('[]','');if(!data[name])
+data[name]=[];data[name].push(elem.value);}else{if(elem.name=='images'){if(!data['images'])
+data['images']=[];data['images'].push(elem.get('value'));}else{data[elem.name]=elem.get('value');}}
+break;case'hidden':if(elem.name!="image_b64")
+data[elem.name]=elem.value;break;case'checkbox':data[elem.name]=elem.checked;break;default:if(elem.value)
+data[elem.name]=elem.value;break;}}}
+return data;},isDescendant(parent){let node=this.parent();while(node!=null){if(node==parent){return true;}
+node=node.parent();}
+return false;},});})();(function(){Object.assign(String.prototype,{title(){return this.charAt(0).toUpperCase()+this.slice(1);},toSlug(){return this.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'').replace(/-+/g,'-');},reverse(){return[...this].reverse().join('');},});})();(function(){window.width=window.innerWidth;})();(function(){Object.assign(HTMLElement.prototype,{css(attr,value){if(value)
+this.style[attr]=value;else{return this.style[attr];}},});})();(function(){Object.assign(HTMLCollection.prototype,{toArray(array=[]){for(let item of this){array.push(item);if(item.children.length)
+array=item.children.toArray(array);}
+return array;},});})();(function(){Object.assign(HTMLFormElement.prototype,{triggerInvalid(){this.addClass('invalid');if(this.validateSubmit){this.validateSubmit.addClass('disabled');this.validateSubmit.set('disabled','disabled');}},triggerValid(){this.removeClass('invalid');if(this.validateSubmit){this.validateSubmit.removeClass('disabled');this.validateSubmit.removeAttr('disabled');}},});})();export class Dom{static var_regex=/{~(\w+)(?:\.(\w+))?~}/g;static cond_regex=/{\?if (?<cond>[a-z ]+)\?}(?<exp1>[\S\s]*)(?:{\?else\?})(?<exp2>[\S\s]*)(?:{\?endif\?})/g;static loop_regex=/{\?for (\w+) in (\w+)\?}([\s\S]*?){\?endfor\?}/g;static id_regex=new RegExp(/^#[\w-]+( #[\w]+)?$/);static render(templateName,container,context={}){let templateNode=Dom.query(templateName);let html=templateNode.innerHTML;if(!html)
+throw new Error("Cant find template with name "+templateName);html=Dom.renderLoops(html,context);html=Dom.renderConditions(html,context);html=Dom.renderVariables(html,context);return container.append(html);}
+static renderConditions(html,context){return html.replace(Dom.cond_regex,(_,__,___,____,offset,string,groups)=>{let{cond,exp1,exp2}=groups;return context[cond]?exp1:(exp2??'');});}
+static renderLoops(html,context){return html.replace(Dom.loop_regex,(full,item,list,body)=>{const arr=context[list];if(!Array.isArray(arr))return'';return arr.map(entry=>{return body.replace(Dom.var_regex,(match,varName,key)=>{if(varName===item){return entry[key]??'';}
+return'';});}).join('');});}
+static renderVariables(html,context){return html.replace(Dom.var_regex,(full,name,prop)=>{if(prop){return context[obj]?.[prop]??'';}
+return context[name]??'';});}
+static query(selector){if(Dom.id_regex.test(selector)){var item=document.querySelector(selector);return item?item:[];}else{return Array.prototype.slice.call(document.querySelectorAll(selector));}}
+static create(element){return document.createElement(element);};static getTemplate(templateName){return Dom.query(templateName).content.cloneNode(true);}
+static insert(html,container,aCallback){Dom.query(container).html(html);Dom.query(`${container}a`).on('click',aCallback);const scripts=Dom.query(`${container}script`);scripts.forEach(oldScript=>{const newScript=Dom.create('script');if(oldScript.src){newScript.src=oldScript.src;newScript.async=true;}else{newScript.textContent=oldScript.textContent;}
+oldScript.replaceWith(newScript);});}}
+export class Menu{constructor(){Dom.query('body').html('this will be menu. later.');}}
+export class Main{constructor(){this.bindEvents();this.menu=new Menu();}
+bindEvents(){Dom.query('body').on('click',()=>{console.log("This JS code works");});}}

@@ -1,0 +1,4 @@
+/* depends on: main.css */
+#login-form .fieldset{
+    grid-template-columns: 1fr;
+}

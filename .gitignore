@@ -1,0 +1,10 @@
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+__pycache__/
+*.pyc
+uwsgi.ini
+node_modules/
+.env
+server/management/commands/reset_dev_db.py 
