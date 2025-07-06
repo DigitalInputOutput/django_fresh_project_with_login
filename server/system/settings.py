@@ -29,6 +29,8 @@ CACHE_FOLDER = HOME_DIR / "client/cache/"
 MAX_MINIFIED_VERSIONS = 3
 MINIFIED_ROOT = CACHE_FOLDER / 'users/static/'
 
+MEDIA_ROOT = HOME_DIR / 'media/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
